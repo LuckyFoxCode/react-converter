@@ -1,12 +1,13 @@
 import { FormData } from '@/libs/types';
 import { useState } from 'react';
-import { Button, Input } from './common';
+import { Box, Button, Input } from './common';
 
 interface FormProps {
   setData: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Form: React.FC<FormProps> = ({ setData }) => {
+  const [nightDays, setNightDays] = useState<number>(0);
   const [form, setForm] = useState<FormData>({
     allHoursDay: 0,
     allHoursNight: 0,
@@ -18,14 +19,20 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const getNightDays = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNightDays(Number(e.target.value));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const result =
-      Number(form.allHoursDay) * Number(form.taxDay) +
-      Number(form.allHoursNight) * (Number(form.taxNight) * 1.5);
+    const dayHours = (form.allHoursDay * 63).toFixed(2);
+    const nightHours = (
+      nightDays * 4 * 63 +
+      (form.allHoursNight - nightDays * 4) * 65.9 * 1.5
+    ).toFixed(2);
 
-    setData(Number(result.toFixed(2)));
+    setData(+dayHours + +nightHours);
   };
 
   return (
@@ -37,8 +44,22 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
         label='Day:'
         name='allHoursDay'
         onChange={getInputValue}
-        value={String(form.allHoursDay)}
+        value={form.allHoursDay}
       />
+      <Box position>
+        <Input
+          label='Night:'
+          name='allHoursNight'
+          onChange={getInputValue}
+          value={form.allHoursNight}
+        />
+        <Input
+          label='Night days:'
+          name='nightDays'
+          onChange={getNightDays}
+          value={nightDays}
+        />
+      </Box>
       <Button type='submit'>Рассчитать</Button>
     </form>
   );

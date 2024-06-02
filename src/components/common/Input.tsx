@@ -3,7 +3,7 @@ import { Box } from './Box';
 
 interface InputProps {
   name?: string;
-  value: string;
+  value: string | number;
   label?: string;
   className?: string;
   type?: 'text' | 'number';
