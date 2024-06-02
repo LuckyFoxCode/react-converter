@@ -26,13 +26,26 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const dayHours = (form.allHoursDay * 63).toFixed(2);
-    const nightHours = (
-      nightDays * 4 * 63 +
-      (form.allHoursNight - nightDays * 4) * 65.9 * 1.5
-    ).toFixed(2);
+    const dayHours = (form.allHoursDay * form.taxDay).toFixed(2);
 
-    setData(+dayHours + +nightHours);
+    const firstStep = nightDays * 4 * form.taxDay;
+    const secondStep = form.allHoursNight - nightDays * 4;
+    const thirdStep = (secondStep * form.taxNight).toFixed(2);
+    const fourthStep = ((firstStep + +thirdStep) * 1.5).toFixed(2);
+    const halfHourPercent = (form.taxNight * 0.5 * nightDays).toFixed(2);
+    const result = +fourthStep - +halfHourPercent;
+
+    console.log(
+      dayHours,
+      firstStep,
+      secondStep,
+      +thirdStep,
+      +fourthStep,
+      +halfHourPercent,
+      result,
+    );
+
+    setData(+dayHours + result);
   };
 
   return (
