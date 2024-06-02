@@ -1,6 +1,6 @@
 import { FormData } from '@/libs/types';
 import { useState } from 'react';
-import { Input } from './common';
+import { Button, Input } from './common';
 
 interface FormProps {
   setData: React.Dispatch<React.SetStateAction<number>>;
@@ -31,7 +31,7 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='w-full max-w-[650px] flex flex-col gap-y-2 bg-gray-800 rounded-xl p-3'
+      className='w-full max-w-[650px] flex flex-col gap-y-3 bg-gray-800 rounded-xl p-3'
     >
       <Input
         label='Day:'
@@ -39,7 +39,7 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
         onChange={getInputValue}
         value={String(form.allHoursDay)}
       />
-      <button>Рассчитать</button>
+      <Button type='submit'>Рассчитать</Button>
     </form>
   );
 };
