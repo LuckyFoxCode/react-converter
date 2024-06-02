@@ -8,12 +8,12 @@ interface FormProps {
 
 export const Form: React.FC<FormProps> = ({ setData }) => {
   const [form, setForm] = useState<FormData>({
-    id: '0',
-    allHoursDay: '',
-    allHoursNight: '',
-    taxDay: '63',
-    taxNight: '65.90',
+    allHoursDay: 0,
+    allHoursNight: 0,
+    taxDay: 63,
+    taxNight: 65.9,
   });
+
   const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -34,16 +34,10 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
       className='w-full max-w-[650px] flex flex-col gap-y-2 bg-gray-800 rounded-xl p-3'
     >
       <Input
-        label='День:'
+        label='Day:'
         name='allHoursDay'
-        value={form.allHoursDay}
         onChange={getInputValue}
-      />
-      <Input
-        label='Ночь:'
-        name='allHoursNight'
-        value={form.allHoursNight}
-        onChange={getInputValue}
+        value={String(form.allHoursDay)}
       />
       <button>Рассчитать</button>
     </form>

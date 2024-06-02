@@ -8,9 +8,11 @@ function App() {
   return (
     <Box position>
       <TheHeader />
-      <main className='px-4 py-4'>
+      <main className='flex flex-col items-center px-4 py-4'>
         <Form setData={setData} />
-        <p className='text-rose-500'>Сумма: {data}</p>
+        <p className='text-rose-500'>
+          Сумма: <span className='text-green-400'>{data}</span>
+        </p>
       </main>
     </Box>
   );

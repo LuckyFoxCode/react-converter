@@ -2,19 +2,21 @@ import { cn } from '@/libs/utils';
 import { Box } from './Box';
 
 interface InputProps {
-  label?: string;
   name?: string;
-  className?: string;
   value: string;
+  label?: string;
+  className?: string;
+  type?: 'text' | 'number';
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input: React.FC<InputProps> = ({
-  label,
   name,
-  className,
+  label,
   value,
   onChange,
+  className,
+  type = 'number',
 }) => {
   return (
     <Box
@@ -30,11 +32,11 @@ export const Input: React.FC<InputProps> = ({
       <input
         id={name}
         name={name}
-        type='text'
+        type={type}
         value={value}
         onChange={onChange}
         placeholder='Введите числовые значения'
-        className='w-full p-2 bg-gray-700 text-slate-300 rounded-xl focus:outline-none'
+        className='w-full p-2 rounded-xl border transition-all border-transparent bg-gray-700 text-slate-300 focus:outline-none focus:border-sky-400'
       />
     </Box>
   );
