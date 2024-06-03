@@ -107,7 +107,7 @@ export const Form: React.FC<FormProps> = ({ setData, className }) => {
         />
       </Box>
 
-      <Button type='submit'>Рассчитать</Button>
+      <Button type='submit'>Convert</Button>
     </form>
   );
 };
