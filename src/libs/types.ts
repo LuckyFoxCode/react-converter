@@ -1,6 +1,6 @@
 export interface FormData {
-  allHoursDay: number;
-  allHoursNight: number;
-  taxDay: number;
-  taxNight: number;
+  allHoursDay: string;
+  allHoursNight: string;
+  taxDay: string;
+  taxNight: string;
 }

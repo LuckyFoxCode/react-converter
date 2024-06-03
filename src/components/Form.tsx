@@ -7,12 +7,12 @@ interface FormProps {
 }
 
 export const Form: React.FC<FormProps> = ({ setData }) => {
-  const [nightDays, setNightDays] = useState<number>(0);
+  const [nightDays, setNightDays] = useState<string>('');
   const [form, setForm] = useState<FormData>({
-    allHoursDay: 0,
-    allHoursNight: 0,
-    taxDay: 63,
-    taxNight: 65.9,
+    allHoursDay: '',
+    allHoursNight: '',
+    taxDay: '63',
+    taxNight: '65.9',
   });
 
   const getInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,19 +20,19 @@ export const Form: React.FC<FormProps> = ({ setData }) => {
   };
 
   const getNightDays = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNightDays(Number(e.target.value));
+    setNightDays(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const dayHours = (form.allHoursDay * form.taxDay).toFixed(2);
+    const dayHours = (+form.allHoursDay * +form.taxDay).toFixed(2);
 
-    const firstStep = nightDays * 4 * form.taxDay;
-    const secondStep = form.allHoursNight - nightDays * 4;
-    const thirdStep = (secondStep * form.taxNight).toFixed(2);
+    const firstStep = +nightDays * 4 * +form.taxDay;
+    const secondStep = +form.allHoursNight - +nightDays * 4;
+    const thirdStep = (secondStep * +form.taxNight).toFixed(2);
     const fourthStep = ((firstStep + +thirdStep) * 1.5).toFixed(2);
-    const halfHourPercent = (form.taxNight * 0.5 * nightDays).toFixed(2);
+    const halfHourPercent = (+form.taxNight * 0.5 * +nightDays).toFixed(2);
     const result = +fourthStep - +halfHourPercent;
 
     console.log(

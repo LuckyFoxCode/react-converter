@@ -3,7 +3,7 @@ import { Box } from './Box';
 
 interface InputProps {
   name?: string;
-  value: string | number;
+  value: string;
   label?: string;
   className?: string;
   type?: 'text' | 'number';
@@ -16,7 +16,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   className,
-  type = 'number',
+  type,
 }) => {
   return (
     <Box
