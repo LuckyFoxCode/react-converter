@@ -38,6 +38,14 @@ export const Form: React.FC<FormProps> = ({ setData, className }) => {
     const result = (dayCount + totalNightCount).toFixed(2);
 
     setData(Number(result));
+
+    setForm({
+      allHoursDay: '',
+      allHoursNight: '',
+      taxDay: '',
+      taxNight: '',
+      daysNight: '',
+    });
   };
 
   return (
